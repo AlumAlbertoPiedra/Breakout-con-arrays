@@ -21,7 +21,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * JavaFX App
+ * Codigo principal de la aplicación
+ * @author Alberto
  */
 public class App extends Application {
 
@@ -48,7 +49,10 @@ public class App extends Application {
 
     
     
-
+/**
+ * Iniciación de la aplicación
+ * @param stage Creación de escenario
+ */
     @Override
     public void start(Stage stage) {
        
@@ -200,28 +204,7 @@ public class App extends Application {
                         bolaView.ballCurrentSpeedY = -bolaView.ballCurrentSpeedY;
                     }
                     
-                    //System.out.println("Ejemplo reinicio");
-                    /*Shape shapeColision5 = Shape.intersect(bloquesView.circleBall, zonaContacto1);
-                    boolean colisionVacia5 = shapeColision5.getBoundsInLocal().isEmpty();
-                    if (colisionVacia5 == false) {
-                        bloques.ballCurrentSpeedY = -bloques.ballCurrentSpeedY;
-                        /*ballCenterY = (ballCenterY + (ballCurrentSpeedY*2));
-                        circleBall.setCenterY(ballCenterY);
-                        if (personaje.getLayoutX()>= 540){
-                            personaje.setLayoutX(personaje.getLayoutX() -200);
-                            personaje.velocidadJefe = -personaje.velocidadJefe;
-                        } else if (personaje.getLayoutY() <= 260){
-                            personaje.setLayoutX(personaje.getLayoutX() +200);
-                            personaje.velocidadJefe = -personaje.velocidadJefe;
-                        }
-                        bloques.score += 50;
-                        textScore.setText(String.valueOf(bloques.score));
-                        bloques.vidaJefe -= 1;
-                        if (bloques.vidaJefe == 0){
-                          winGame(); 
-                          bloques.vida = 0;
-                        }
-                    }*/
+                   
                     bloquesView.colisionObjeto(bolaView, palaView);
                    
                     calculateBallSpeed(getStickCollisionZone(bolaView.circleBall, palaView.rectPala));
@@ -260,7 +243,12 @@ public class App extends Application {
             stickCurrentSpeed = 0;
         });
     }
-
+/**
+ * Devolver la zona de colisión
+ * @param ball Creación de la pelota
+ * @param stick Creación de la pala
+ * @return Devuelve un numero entre 1 y 4 dependiendo de la zona con la que colisiones
+ */
     private int getStickCollisionZone(Circle ball, Rectangle stick) {
         if (Shape.intersect(ball, stick).getBoundsInLocal().isEmpty()) {
             return 0;
@@ -277,7 +265,10 @@ public class App extends Application {
             }
         }
     }
-
+/**
+ * Elegir la velocidad dependiendo de la zona de colisión
+ * @param collisionZone  El valor devuelto por el metodo getStickCollisionZone
+ */
     private void calculateBallSpeed(int collisionZone) {
         switch (collisionZone) {
             case 0:
@@ -320,27 +311,7 @@ public class App extends Application {
                 break;
         }
     }
-
-    //Reiniciar el juego tras acabar partida o perder
-    /*private void resetGame() {
-        bloques.ballCurrentSpeedX = 3;
-        bloques.ballCurrentSpeedY = 3;
-        bloquesView.vida = 1;
-        bloquesView.vidaJefe = 3;
-        personaje.setLayoutX(50);
-        personaje.setLayoutY(0); 
-    }*/
     
-    //Eliminas todos los bloques
-    /*private void winGame() {
-        personaje.setLayoutX(-1200);
-        personaje.setLayoutY(-1200);
-        bolaView.ballCurrentSpeedX = 0;
-        bolaView.ballCurrentSpeedY = 0;
-        bolaView.ballCenterY = 400;
-        bolaView.ballCenterX = 400;
-    }*/
-
     public static void main(String[] args) {
         launch();
     }

@@ -5,7 +5,10 @@ import java.util.Random;
 
 // Tengo que crear un array para los rectangulos y poder diferenciarlos entre si
 
-
+/**
+ * Genera los caracteres de los bloques en la consola
+ * @author Alberto
+ */
 public final class Bloques{ 
     char [] [] pos;
     int columnas= 20;
@@ -28,7 +31,10 @@ public final class Bloques{
 
     
         
-    
+    /**
+     * Genera los caracteres de los bloques en la consola
+     * @param filas Numero de filas que va a haber de obstaculos
+     */
     public Bloques(int filas){
         this.filas = filas;
         char bloque = '*';
@@ -56,6 +62,14 @@ public final class Bloques{
         this.mostrarPorConsola();  
     }
     
+    /**
+     * Elimina el bloque con el que ha impactado la bola
+     * @param posX Posición X del bloque eliminado en el array 
+     * @param posY Posición Y del bloque eliminado en el array
+     * @param bolaView Creación de la bola
+     * @param palaView Creación de la pala
+     * @return Devuelve el caracter del bloque que se ha eliminado
+     */
     public char eliminarBloque(int posX, int posY, BolaView bolaView, PalaView palaView ){
         char caracter= getchar(posX, posY);
         if (caracter == '+'){
@@ -65,7 +79,6 @@ public final class Bloques{
         }
         char bloqueEliminado = ' ';
         pos [posX] [posY] = bloqueEliminado;
-        //this.mostrarPorConsola(); 
         this.comprobarFilaVacia(filas);
         this.comprobarVictoria();
         return caracter;
@@ -73,27 +86,44 @@ public final class Bloques{
         
  
     }
-    
+    /**
+     * Creación bloque especial que aumenta la velocidad
+     * @param especialVelX Posición X del bloque especial
+     * @param especialVelY Posición Y del bloque especial
+     */
     public void bloqueEspecialVelocidad(int especialVelX, int especialVelY){
         char bloqueEspecialVelocidad = '+';
         pos [especialVelX] [especialVelY] = bloqueEspecialVelocidad;
     }
+    /**
+     * Creación bloque especial que reduce el tamaño de la pala
+     * @param especialPalaX Posición X del bloque especial
+     * @param especialPalaY Posición Y del bloque especial
+     */
     public void bloqueEspecialPala(int especialPalaX, int especialPalaY){
         char bloqueEspecialPala = '-';
         pos [especialPalaX] [especialPalaY] = bloqueEspecialPala;
     }
+    /**
+     * Generar número aleatorio
+     * @param min Número minimo que puede salir aleatoriamente
+     * @param max Número máxmio que puede salir aleatoriamente
+     * @return Devuelve el número aleatorio que ha salido
+     */
     public int getNumAleatorio(int min, int max) {
         Random random = new Random();
         int num = random.nextInt(max-min+1) + min;
         return num;
     }
-    
+    /**
+     * Comprueba si la fila esta vacia
+     * @param fila Fila que hay que comprobar
+     * @return Devuelve si la fila esta vacia o no 
+     */
     public boolean comprobarFilaVacia(int fila){
         for (int x=0; x<columnas; x++){
             char caracter = getchar(fila,x);
             if (caracter != ' '){
-                //System.out.println("La fila no esta vacia");
-                //System.out.println(caracter);
                 return false;
             }            
         }
@@ -101,12 +131,20 @@ public final class Bloques{
         score += 100;
         return true;
     }
-    
+    /**
+     * Devuelve el caracter de la posición que queramos
+     * @param i posición X del caracter que queremos retornar
+     * @param p posición Y del caracter que queremos retornar
+     * @return Devuelve el caracter de la posición que queramos
+     */
     public char getchar(int i, int p){
         char caracter = pos [i] [p];
         return caracter;
     }
 
+    /**
+     * Muestra por consola
+     */
     public void mostrarPorConsola() {
         for (int y=0; y<filas; y++){
             for(int x=0; x<columnas; x++){
@@ -115,14 +153,24 @@ public final class Bloques{
             System.out.println();
         }    
     }
+    /**
+     * Muestra la puntuación
+     */
     public void mostrarPuntuacion() {
         System.out.println(puntuacion);
     }
+    /**
+     * Reiniciar algunos parametros del juego
+     */
     public void resetGame() {
         vida = 1;
         vidaJefe = 3;
         palaView.tamañoPala= 80;
     }
+    /**
+     * Comprueba si todos los obstaculos se han eliminado
+     * @return Devuelve un true si todos los obstaculos han sido eliminados o un false en caso contrario
+     */
     public boolean comprobarVictoria(){
         for (int y=0; y<filas; y++){
             for (int x=0; x<columnas;x++){
@@ -139,6 +187,9 @@ public final class Bloques{
         this.winGame();
         return true;
     }
+    /**
+     * Para el juego cuando ganas la partida.
+     */
     public void winGame(){
         personaje.setLayoutX(-1200);
         personaje.setLayoutY(-1200);

@@ -7,11 +7,18 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * Metodo para crear personaje
+ * @author Alberto
+ */
+
 public class Personaje extends Group {
 
     Rectangle zonaContacto1 = new Rectangle(-20, 0, 90, 120);
     int velocidadJefe = 5;
     BolaView bolaView;
+    
+    
 
     public Personaje() {
 
@@ -61,8 +68,15 @@ public class Personaje extends Group {
         this.setLayoutY(0);
         this.setScaleX(0.75);
         this.setScaleY(0.75);
+        
     }
 
+    /**
+     * Metodo para la colision de la bola con el personaje
+     * @param circleBall Circulo para crear la bola
+     * @param bloques Tamaño del array
+     * @param bolaView Creación de la bola
+     */
     public void colisionPersonaje(Circle circleBall, Bloques bloques, BolaView bolaView) {
         Shape shapeColision = Shape.intersect(circleBall, zonaContacto1);
         boolean colisionVaciaPersonaje = shapeColision.getBoundsInLocal().isEmpty();
@@ -85,6 +99,9 @@ public class Personaje extends Group {
             }
         }
     }
+    /**
+     * Metodo para reiniciar el personaje
+     */
     public void resetGame(){
         this.setLayoutX(50);
         this.setLayoutY(0);

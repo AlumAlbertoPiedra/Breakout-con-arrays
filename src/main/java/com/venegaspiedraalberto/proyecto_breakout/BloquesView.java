@@ -7,6 +7,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * Creación de los obstaculos del juego
+ * @author Alberto
+ */
+
 public class BloquesView extends GridPane {
         //Rectangle rectangleObstaculo = new Rectangle();
         Rectangle [] [] rect;
@@ -22,7 +27,10 @@ public class BloquesView extends GridPane {
            
         
                        
-    
+    /**
+     * Creación de los obstaculos
+     * @param bloques Tamaño del array
+     */
     public BloquesView(Bloques bloques) { 
         this.bloques = bloques;
         
@@ -37,10 +45,12 @@ public class BloquesView extends GridPane {
         this.setStyle("-fx-padding: 140 0 0 0;-fx-grid-lines-visible: true");
         this.actualizarBloque(bloques);
         
-        //this.inicializar();
         
         
     }
+    /**
+     * Colocar los obstaculos e su posición
+     */
     public void inicializar(){
         for(int y=0; y<bloques.filas; y++) {
             for(int x=0; x<bloques.columnas; x++) {
@@ -48,6 +58,10 @@ public class BloquesView extends GridPane {
             }
         }
     }
+    /**
+     * Cambiar el color de los bloques y bloques especiales
+     * @param bloques Tamaño Array
+     */
     public void actualizarBloque(Bloques bloques){
         this.bloques=bloques;
     for(int y=0; y<bloques.filas; y++) {
@@ -83,6 +97,11 @@ public class BloquesView extends GridPane {
             }
         }
     }
+    /**
+     * Colisión de los obstaculos y la bola
+     * @param bolaView Creación de la bola
+     * @param palaView Creación de la pala
+     */
     public void colisionObjeto(BolaView bolaView, PalaView palaView){
         for(int x=0; x<bloques.columnas; x++) {
             for(int y=0; y<bloques.filas; y++) {
@@ -95,26 +114,23 @@ public class BloquesView extends GridPane {
                     bloques.eliminarBloque(x, y, bolaView, palaView);
                     rect[x] [y].setTranslateX(2000);
                     bloques.score +=10;                   
-                    
-                    // Guardar Codigo por si acaso 
-                     /*if (bolaView.ballCurrentSpeedX>0 && bolaView.ballCurrentSpeedY>0 ){
-                        bolaView.ballCurrentSpeedX = -bolaView.ballCurrentSpeedX;
-                    } else if (bolaView.ballCurrentSpeedX >0 && bolaView.ballCurrentSpeedY<0 ){
-                        bolaView.ballCurrentSpeedY = -bolaView.ballCurrentSpeedY;
-                    } else if (bolaView.ballCurrentSpeedX <0 && bolaView.ballCurrentSpeedY>0 ){
-                        bolaView.ballCurrentSpeedY = -bolaView.ballCurrentSpeedY;
-                    } else if (bolaView.ballCurrentSpeedX <0 && bolaView.ballCurrentSpeedY<0 ){
-                        bolaView.ballCurrentSpeedX = -bolaView.ballCurrentSpeedX;*/
                 }    
             }
         } 
     }
+    /**
+     * Reinicar los obstaculos
+     */
     public void resetGame() {
         
-        //this.getChildren().removeAll();
         this.inicializar();
-        //bloques.mostrarPorConsola();
     }
+    /**
+     * Sacar número aleatorio
+     * @param min Mínimo que puede salir
+     * @param max Maximo que puede salir
+     * @return Devuelve el número que ha salido aleatoriamente
+     */
     public int getNumAleatorio(int min, int max) {
         Random random = new Random();
         int color = random.nextInt(max-min+1) + min;
